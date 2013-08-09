@@ -1,0 +1,90 @@
+<!--
+#
+#    This file is part of quoter.
+#
+#    quoter is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU Lesser General Public License as published by
+#    the Free Software Foundation, either version 3 of the License, or
+#    any later version.
+#
+#    Foobar is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU Lesser General Public License
+#    along with quoter.  If not, see <http://www.gnu.org/licenses/>.
+#
+-->
+
+<html>
+  <head>
+    <link rel="shortcut icon" href="../img/tda-logo.png" />
+<style type="text/css">
+a:link {color: black;}      /* unvisited link */
+a:visited {color: black;}  /* visited link */
+a:hover {color: black;}  /* mouse over link */
+a:active {color: black;}  /* selected link */
+</style>
+  </head>
+  {% if print %}
+      <body>
+  {% else %}
+      <body bgcolor=cfbe95>
+      <p align=center>
+      <br>
+  {% endif %}
+    {% if print %}
+       <table bgcolor=white width=100%>
+    {% else %}
+       <table bgcolor=white width=50% border=0>
+       <tr><td colspan=4 align=center><img align=center src='/static/img/tda-logo.png' /></td></tr>
+       <tr><td colspan=4>&nbsp;</td></tr>
+    {% endif %}
+      <tr><td colspan=4><h2>QUOTATION/SPECIFICATION</h2></td></tr>
+      <tr><td colspan=4><b>FROM: THE DESIGN ASSOCIATES</b></td></tr>
+      <tr><td colspan=4><b>TELEPHONE 07754 748161&nbsp;&nbsp;&nbsp;<a href="mailtorobin.tda@gmail.com?{{customer.email}}?subject={{quote.title}}">E.Mail: robin.tda@gmail.com</a></b></td></tr>
+      <tr><td colspan=4>&nbsp;</td></tr>
+      {% for block in blocks %}
+          <tr><td valign=top colspan=3><b>{{block.name}}</b></td><td><table border=0>          
+          {% for line in block.lines %}       
+<tr><td>{% if line.subtitle %}{{line.subtitle}}</td><td>{% else %}<td>{% endif %}
+{% if line.defaultDetails %} {{line.defaultDetails}} {% else %} {{line.details}} {% endif %}</td>
+                    {% if block.totalSection %}
+	                {% if line.amount %}
+                               <td align=right>&pound;{{line.amount}}</td>
+                        {% endif %} 
+                    {% endif %}
+</tr>
+          {% endfor %}
+          </table>
+          {% if block.totalSection %}
+              <tr><td colspan=4 align=right>&pound;{{block.total}}</td></tr>
+          {% endif %}
+      {% endfor %}
+      <tr><td colspan=4>&nbsp;</td></tr>
+      <tr><td colspan=4>&nbsp;</td></tr>
+      {% for key,value in totals.items %}
+         <tr><td width=23% colspan=3><b>{{key}}</b></td><td align=right><b>&pound;{{value}}</b></td></tr>
+      {% endfor %}
+      <tr><td colspan=4>&nbsp;</td></tr>
+      <tr>                              <td colspan=4 align=right>______</td></tr>
+      <tr><td colspan=2><b>Total Cost:</b></td><td colspan=2 align=right><b>&pound;{{total}}</b></td></tr>
+      <tr><td colspan=4>&nbsp;</td></tr>
+      <tr><td colspan=4><b><small>Robin Scott</small></b></td></tr>
+      <tr><td colspan=4><b><small>The Design Associates</small></b></td></tr>
+   </table>
+   </p>
+    {% if not print %}
+   <footer>
+     <div>&nbsp;</div>
+     <div align="right">
+       <table>
+         <tr><td align=center>{{quote.message}}</td></tr>
+         <tr><td align=right><a href="mailtorobin.tda@gmail.com?{{customer.email}}?subject={{quote.title}}">Click here to email a proposed date to start</a></td></tr>
+       </table>
+     </div>
+   </footer>
+   {% endif %}
+  </body>
+</html>
