@@ -71,7 +71,7 @@ class QuoteLine(models.Model):
 
 class Viewing(models.Model):
     ip             = models.TextField()
-    quote          = models.TextField(unique=True)    
+    quote          = models.TextField()    
     data           = models.TextField(null=True,blank=True)
     first_inserted = models.DateTimeField(auto_now_add=True)
     last_updated   = models.DateTimeField(auto_now=True)

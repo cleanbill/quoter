@@ -31,8 +31,8 @@ a:active {color: black;}  /* selected link */
       <body>
   {% else %}
       <body bgcolor=cfbe95>
+      <a href=../print/{{token}}>Click here for printer friendly version</a>
       <p align=center>
-      <br>
   {% endif %}
     {% if print %}
        <table bgcolor=white width=100%>
@@ -52,24 +52,24 @@ a:active {color: black;}  /* selected link */
 {% if line.defaultDetails %} {{line.defaultDetails}} {% else %} {{line.details}} {% endif %}</td>
                     {% if block.totalSection %}
 	                {% if line.amount %}
-                               <td align=right>&pound;{{line.amount}}</td>
+                               <td align=right>&pound;{{ line.amount|floatformat:2 }}&nbsp;</td>
                         {% endif %} 
                     {% endif %}
 </tr>
           {% endfor %}
           </table>
           {% if block.totalSection %}
-              <tr><td colspan=4 align=right>&pound;{{block.total}}</td></tr>
+              <tr><td colspan=4 align=right>&pound;{{ block.total|floatformat:2 }}&nbsp;</td></tr>
           {% endif %}
       {% endfor %}
       <tr><td colspan=4>&nbsp;</td></tr>
       <tr><td colspan=4>&nbsp;</td></tr>
       {% for key,value in totals.items %}
-         <tr><td width=23% colspan=3><b>{{key}}</b></td><td align=right><b>&pound;{{value}}</b></td></tr>
+         <tr><td width=23% colspan=3><b>{{key}}</b></td><td align=right><b>&pound;{{ value|floatformat:2 }}&nbsp;</b></td></tr>
       {% endfor %}
       <tr><td colspan=4>&nbsp;</td></tr>
       <tr>                              <td colspan=4 align=right>______</td></tr>
-      <tr><td colspan=2><b>Total Cost:</b></td><td colspan=2 align=right><b>&pound;{{total}}</b></td></tr>
+      <tr><td colspan=2><b>Total Cost:</b></td><td colspan=2 align=right><b>&pound;{{ total|floatformat:2 }}&nbsp;</b></td></tr>
       <tr><td colspan=4>&nbsp;</td></tr>
       <tr><td colspan=4><b><small>Robin Scott</small></b></td></tr>
       <tr><td colspan=4><b><small>The Design Associates</small></b></td></tr>

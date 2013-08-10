@@ -80,7 +80,24 @@ def get_client_ip(request):
         ip = request.META.get('REMOTE_ADDR')
     return ip        
 
-    
+def toggle(request,quote_token):    
+        # Check if valid
+        if (Quote.objects.filter(token=quote_token).count() == 0):
+            print "'%s' cannot be found in database" % quote_token
+            raise Http404
+        
+        # serve quote
+        quoteHeader = Quote.objects.get(token=quote_token)
+        quoteHeader.display = not quoteHeader.display
+        quoteHeader.save()
+
+        if quoteHeader.display:
+            return quote(request,quote_token)
+        else:
+            print "'%s' is NOW set to not display" % quote_token
+            raise Http404
+            
+            
 def quote(request,quote_token,printFormat=False):
 
         view = Viewing()
@@ -91,11 +108,13 @@ def quote(request,quote_token,printFormat=False):
         
         # Check if valid
         if (Quote.objects.filter(token=quote_token).count() == 0):
+            print "'%s' cannot be found in database" % quote_token
             raise Http404
         
         # serve quote
         quoteHeader = Quote.objects.get(token=quote_token)
         if (not quoteHeader.display):
+            print "'%s' is set to not display" % quote_token
             raise Http404
 
         # Check if expired
@@ -127,5 +146,5 @@ def quote(request,quote_token,printFormat=False):
         blocks = sorted(blocks,key=lambda block: block.order)
         blocks.insert(0,getClientBlock(quoteHeader))
         blocks.insert(0,getDateBlock(quoteHeader))
-        params = {'quote':quoteHeader,'customer':quoteHeader.customer,'blocks':blocks,'totals':totals,'total':grandTotal,'expired':expired,'print':printFormat}
+        params = {'token':quote_token,'quote':quoteHeader,'customer':quoteHeader.customer,'blocks':blocks,'totals':totals,'total':grandTotal,'expired':expired,'print':printFormat}
         return render_to_response('index.html',params)
