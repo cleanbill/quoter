@@ -121,13 +121,15 @@ def quote(request,quote_token,printFormat=False):
         # Check if valid
         if (Quote.objects.filter(token=quote_token).count() == 0):
             logger.info("'%s' cannot be found in database" % quote_token)
-            raise Http404
+            #raise Http404
+            return nowhere(request)
         
         # serve quote
         quoteHeader = Quote.objects.get(token=quote_token)
         if (not quoteHeader.display):
             logger.info("'%s' is set to not display" % quote_token)
-            raise Http404
+            #raise Http404
+            return nowhere(request)
 
         # Check if expired
         expireDate  = quoteHeader.expire
