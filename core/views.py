@@ -15,7 +15,7 @@
 #    along with Quoter.  If not, see <http://www.gnu.org/licenses/>.
 #
 from django.http                import HttpResponse, HttpResponseRedirect, Http404
-from django.shortcuts           import render_to_response
+from django.shortcuts           import render_to_response, redirect
 from django.contrib.auth.models import User
 
 from core.models import Quote, QuoteLine, Viewing 
@@ -23,6 +23,7 @@ from datetime import date, timedelta
 import datetime
 from django.utils import timezone
 import logging
+
 
 # Get an instance of a logger
 logger = logging.getLogger(__name__)
@@ -100,6 +101,10 @@ def toggle(request,quote_token):
         else:
             logger.info("'%s' is NOW set to not display" % quote_token)
             raise Http404
+
+
+def jumper(request):
+    return redirect('/admin/')
             
 def 404(request):
         return render_to_response('404.html')

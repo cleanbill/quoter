@@ -16,6 +16,8 @@ urlpatterns = patterns('',
 urlpatterns += patterns('core.views',
     (r'quote/(?P<quote_token>.+)$','quote'),
     (r'toggle/(?P<quote_token>.+)$','toggle'),
+    (r'404','404'),
+    (r'/','jumpin'),
     (r'print/(?P<quote_token>.+)$','printQuote')
 )
                    
