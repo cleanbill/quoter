@@ -103,11 +103,12 @@ def toggle(request,quote_token):
             raise Http404
 
 
-def jumper(request):
-    return redirect('/admin/')
+def jumpin(request):
+        return redirect('/admin/')
             
-def 404(request):
-    return render_to_response('404.html',{})
+def nowhere(request):
+        params = {}
+        return render_to_response('404.html',params)
         
 def quote(request,quote_token,printFormat=False):
 
