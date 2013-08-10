@@ -24,7 +24,4 @@ Technologies
 TODO
 ----
 
-1. Do expired 
-2. Decimal points
-3. Look at prod 404
-4. Side Image
+1. Sort out 404 and bad urls

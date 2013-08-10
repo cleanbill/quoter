@@ -101,7 +101,9 @@ def toggle(request,quote_token):
             logger.info("'%s' is NOW set to not display" % quote_token)
             raise Http404
             
-            
+def 404(request):
+        return render_to_response('404.html')
+        
 def quote(request,quote_token,printFormat=False):
 
         view = Viewing()

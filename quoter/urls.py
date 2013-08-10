@@ -19,3 +19,4 @@ urlpatterns += patterns('core.views',
     (r'print/(?P<quote_token>.+)$','printQuote')
 )
                    
+handler404 = 'core.views.404'
