@@ -22,6 +22,10 @@ from core.models import Quote, QuoteLine, Viewing
 from datetime import date, timedelta 
 import datetime
 from django.utils import timezone
+import logging
+
+# Get an instance of a logger
+logger = logging.getLogger(__name__)
 
 class Block():
         pass
@@ -83,7 +87,7 @@ def get_client_ip(request):
 def toggle(request,quote_token):    
         # Check if valid
         if (Quote.objects.filter(token=quote_token).count() == 0):
-            print "'%s' cannot be found in database" % quote_token
+            logger.info("'%s' cannot be found in database" % quote_token)
             raise Http404
         
         # serve quote
@@ -94,7 +98,7 @@ def toggle(request,quote_token):
         if quoteHeader.display:
             return quote(request,quote_token)
         else:
-            print "'%s' is NOW set to not display" % quote_token
+            logger.info("'%s' is NOW set to not display" % quote_token)
             raise Http404
             
             
@@ -108,20 +112,24 @@ def quote(request,quote_token,printFormat=False):
         
         # Check if valid
         if (Quote.objects.filter(token=quote_token).count() == 0):
-            print "'%s' cannot be found in database" % quote_token
+            logger.info("'%s' cannot be found in database" % quote_token)
             raise Http404
         
         # serve quote
         quoteHeader = Quote.objects.get(token=quote_token)
         if (not quoteHeader.display):
-            print "'%s' is set to not display" % quote_token
+            logger.info("'%s' is set to not display" % quote_token)
             raise Http404
 
         # Check if expired
         expireDate  = quoteHeader.expire
         today       = timezone.now()
         delta       = expireDate - today
-        expired     = delta > timedelta(minutes = 1) 
+        expired     = delta <= timedelta(minutes = 1)
+        if expired: 
+             logger.info("%s has expired" % quote_token) 
+        else: 
+             logger.info("%s is still relevent" % quote_token) 
            
         quoteLines  = QuoteLine.objects.filter(quote=quoteHeader).order_by( 'section' )
         blocks = []

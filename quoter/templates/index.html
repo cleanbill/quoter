@@ -41,6 +41,9 @@ a:active {color: black;}  /* selected link */
        <tr><td colspan=4 align=center><img align=center src='/static/img/tda-logo.png' /></td></tr>
        <tr><td colspan=4>&nbsp;</td></tr>
     {% endif %}
+    {% if expired %}
+       <tr><td colspan=4 align=center><font color=red><b>- This quote is out of date, please contact us -</b></font></td></tr>
+    {% endif %}
       <tr><td colspan=4><h2>QUOTATION/SPECIFICATION</h2></td></tr>
       <tr><td colspan=4><b>FROM: THE DESIGN ASSOCIATES</b></td></tr>
       <tr><td colspan=4><b>TELEPHONE 07754 748161&nbsp;&nbsp;&nbsp;<a href="mailtorobin.tda@gmail.com?{{customer.email}}?subject={{quote.title}}">E.Mail: robin.tda@gmail.com</a></b></td></tr>
@@ -49,7 +52,9 @@ a:active {color: black;}  /* selected link */
           <tr><td valign=top colspan=3><b>{{block.name}}</b></td><td><table border=0>          
           {% for line in block.lines %}       
 <tr><td>{% if line.subtitle %}{{line.subtitle}}</td><td>{% else %}<td>{% endif %}
-{% if line.defaultDetails %} {{line.defaultDetails}} {% else %} {{line.details}} {% endif %}</td>
+{% if line.defaultDetails %} {{line.defaultDetails}} {% else %}
+{% if block.name == "Date:" %} {{line.details|date}} {% else %}
+ {{line.details}} {% endif %}{% endif %}</td>
                     {% if block.totalSection %}
 	                {% if line.amount %}
                                <td align=right>&pound;{{ line.amount|floatformat:2 }}&nbsp;</td>
