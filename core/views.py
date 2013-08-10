@@ -107,7 +107,7 @@ def jumper(request):
     return redirect('/admin/')
             
 def 404(request):
-        return render_to_response('404.html')
+    return render_to_response('404.html',{})
         
 def quote(request,quote_token,printFormat=False):
 
