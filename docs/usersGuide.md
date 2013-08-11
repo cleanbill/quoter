@@ -16,3 +16,21 @@ After logging in the screen should look like:
 Click on customers and enter a customer in
  
 !["Admin"](https://raw.github.com/cleanbill/quoter/master/docs/Screenshot%20from%202013-08-11%2008:11:52.png)
+
+Click save 
+
+!["Admin"](https://raw.github.com/cleanbill/quoter/master/docs/Screenshot%20from%202013-08-11%2008:12:17.png)
+
+Click Core and return to the core administration
+
+!["Admin"](https://raw.github.com/cleanbill/quoter/master/docs/Screenshot%20from%202013-08-11%2008:12:58.png)
+
+Click Quotes add and enter the basic header info of the quote. The "token" field will be used to uniquely identify this quote and will make up part of the address, eg: [https://gentle-cliffs-8060.herokuapp.com/quote/helen](https://gentle-cliffs-8060.herokuapp.com/quote/helen) 
+
+!["Admin"](https://raw.github.com/cleanbill/quoter/master/docs/Screenshot%20from%202013-08-11%2008:14:22.png)
+
+
+
+
+
+
