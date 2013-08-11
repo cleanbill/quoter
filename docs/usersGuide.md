@@ -34,6 +34,7 @@ Click "Save", "Core" and select Section Add...
 
 !["Admin"](https://raw.github.com/cleanbill/quoter/master/docs/Screenshot%20from%202013-08-11%2008:20:17.png)
 
+NB. This section is just text so does not need a total, this is why the total box is un-ticked.
 Click "Save and add another" until all the following sections have been inserted. The sections will appear on the quote depending on the value of the order field. Low numbers first.
 
 !["Admin"](https://raw.github.com/cleanbill/quoter/master/docs/Screenshot%20from%202013-08-11%2008:39:04.png)
@@ -49,17 +50,13 @@ Add default values like:
 Fill in the quote lines like:
 
 !["Admin"](https://raw.github.com/cleanbill/quoter/master/docs/Screenshot%20from%202013-08-11%2008:23:52.png)
-
-or
-
-!["Admin"](https://raw.github.com/cleanbill/quoter/master/docs/Screenshot%20from%202013-08-11%2016:27:26.png)
-
-or
-
 !["Admin"](https://raw.github.com/cleanbill/quoter/master/docs/Screenshot%20from%202013-08-11%2016:27:52.png)
-
-or
-
 !["Admin"](https://raw.github.com/cleanbill/quoter/master/docs/Screenshot%20from%202013-08-11%2016:28:35.png)
+
+Then check the quote page to see if everything is right:
+
+!["Admin"](https://raw.github.com/cleanbill/quoter/master/docs/Screenshot%20from%202013-08-11%2016:41:40.png)
+
+
 
 
