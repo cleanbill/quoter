@@ -19,7 +19,7 @@ Click on customers and enter a customer in
 
 Click save 
 
-!["Admin"](https://raw.github.com/cleanbill/quoter/master/docs/Screenshot%20from%202013-08-11%2008:12:17.png)
+!["Admin"](https://raw.github.com/cleanbill/quoter/master/docs/Screenshot%20from%202013-08-11%2008:12:08.png)
 
 Click Core and return to the core administration
 
