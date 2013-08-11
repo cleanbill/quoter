@@ -20,8 +20,3 @@ Technologies
 2. [AngularJs](http://angularjs.org/) -> Not used...boo!
 3. Hopefully use [Heroku](https://www.heroku.com/) to host for free, but means I have to get the database model right first time
 
-
-TODO
-----
-
-1. Sort out 404 and bad urls
