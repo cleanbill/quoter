@@ -49,7 +49,7 @@ a:active {color: black;}  /* selected link */
       <tr><td colspan=4><b>TELEPHONE 07754 748161&nbsp;&nbsp;&nbsp;<a href="mailtorobin.tda@gmail.com?{{customer.email}}?subject={{quote.title}}">E.Mail: robin.tda@gmail.com</a></b></td></tr>
       <tr><td colspan=4>&nbsp;</td></tr>
       {% for block in blocks %}
-          <tr><td valign=top colspan=3><b>{{block.name}}</b></td><td><table border=1>          
+          <tr><td valign=top colspan=3><b>{{block.name}}</b></td><td><table border=0>          
           {% for line in block.lines %}       
              <tr>
                  {% if line.details %}
@@ -67,7 +67,7 @@ a:active {color: black;}  /* selected link */
                     {% if block.totalSection %}
 	                {% if line.amount %}
                                <td align=right><b>&pound;{{ line.amount|floatformat:2 }}&nbsp;</b></td>
-                               <td>&nbsp;&nbsp;&nbsp;</td>
+                               
                         {% endif %} 
                     {% endif %}
 </tr>
