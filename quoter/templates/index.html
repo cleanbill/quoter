@@ -27,6 +27,7 @@ a:hover {color: black;}  /* mouse over link */
 a:active {color: black;}  /* selected link */
 </style>
   </head>
+  DEBUG total length is {{ totals.length }}
   {% if print %}
       <body>
   {% else %}
@@ -51,7 +52,7 @@ a:active {color: black;}  /* selected link */
       {% for block in blocks %}
           <tr><td valign=top colspan=3><b>{{block.name}}</b></td><td><table border=0>          
           {% for line in block.lines %}       
-<tr>{% if line.subtitle %}<td colspan=2>{{line.subtitle}}</td><td>{% else %}<td>{% endif %}
+<tr>{% if line.subtitle %}<td colspan=3><b>{{line.subtitle}}</b></td>{% else %}<td>{% endif %}
 {% if line.defaultDetails %} {{line.defaultDetails}} {% else %}
 {% if block.name == "Date:" %} {{line.details|date}} {% else %}
  {{line.details}} {% endif %}{% endif %}</td>
@@ -64,13 +65,12 @@ a:active {color: black;}  /* selected link */
           {% endfor %}
           </table>
           {% if block.totalSection %}
-              <tr><td colspan=4 align=right>&pound;{{ block.total|floatformat:2 }}&nbsp;</td></tr>
+              <tr><td colspan=4 align=right><b>&pound;{{ block.total|floatformat:2 }}&nbsp;</b></td></tr>
           {% endif %}
       {% endfor %}
       <tr><td colspan=4>&nbsp;</td></tr>
       <tr><td colspan=4>&nbsp;</td></tr>
       {% for key,value in totals.items %}
-         <script>alert("key is "+key);</script>
          <tr><td width=23% colspan=3><b>{{key}}</b></td><td align=right><b>&pound;{{ value|floatformat:2 }}&nbsp;</b></td></tr>
       {% endfor %}
       <tr><td colspan=4>&nbsp;</td></tr>
