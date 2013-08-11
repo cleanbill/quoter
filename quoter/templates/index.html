@@ -54,7 +54,7 @@ a:active {color: black;}  /* selected link */
              <tr>
                  {% if line.details %}
                         {% if line.subtitle %}<td valign=top><b>{{line.subtitle}}</b></td>{% endif %}
-                        <td>
+                        <td colspan=2>
                         {% if block.name == "Date:" %} 
                              {{line.details|date}} 
                         {% else %}
