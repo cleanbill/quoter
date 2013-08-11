@@ -53,9 +53,13 @@ Fill in the quote lines like:
 !["Admin"](https://raw.github.com/cleanbill/quoter/master/docs/Screenshot%20from%202013-08-11%2016:27:52.png)
 !["Admin"](https://raw.github.com/cleanbill/quoter/master/docs/Screenshot%20from%202013-08-11%2016:28:35.png)
 
-Then check the quote page to see if everything is right:
+Then check the quote page - [https://gentle-cliffs-8060.herokuapp.com/quote/mick](https://gentle-cliffs-8060.herokuapp.com/quote/mick) - to see if everything is right:
 
 !["Admin"](https://raw.github.com/cleanbill/quoter/master/docs/Screenshot%20from%202013-08-11%2016:41:40.png)
+
+If everything is ok, highlight the address, right click, copy and paste it into an email to send to the customer.
+
+Job Done.
 
 
 
