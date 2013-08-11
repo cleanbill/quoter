@@ -29,8 +29,9 @@ Click Quotes add and enter the basic header info of the quote. The "token" field
 
 !["Admin"](https://raw.github.com/cleanbill/quoter/master/docs/Screenshot%20from%202013-08-11%2008:14:22.png)
 
+Click "Save", "Core" and select Section Add..
 
-
+!["Admin"](https://raw.github.com/cleanbill/quoter/master/docs/Screenshot%20from%202013-08-11%2008:20:17.png)
 
 
 
