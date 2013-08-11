@@ -15,10 +15,10 @@ urlpatterns = patterns('',
 
 urlpatterns += patterns('core.views',
     (r'quote/(?P<quote_token>.+)$','quote'),
+    (r'print/(?P<quote_token>.+)$','printQuote'),
     (r'toggle/(?P<quote_token>.+)$','toggle'),
     (r'/404','nowhere'),
-    (r'$','jumpin'),
-    (r'print/(?P<quote_token>.+)$','printQuote')
+    (r'$','jumpin')
 )
                    
 handler404 = 'core.views.404'
