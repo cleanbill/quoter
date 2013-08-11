@@ -147,6 +147,8 @@ def quote(request,quote_token,printFormat=False):
         grandTotal = 0
         totals = {}
         for line in quoteLines:
+            if line.defaultDetails:
+                line.details = line.defaultDetails    
             if line.amount:
                 grandTotal = grandTotal + line.amount
                 totalName = line.details
