@@ -52,10 +52,23 @@ a:active {color: black;}  /* selected link */
       {% for block in blocks %}
           <tr><td valign=top colspan=3><b>{{block.name}}</b></td><td><table border=0>          
           {% for line in block.lines %}       
-<tr>{% if line.subtitle %}<td colspan=3><b>{{line.subtitle}}</b></td>{% else %}<td>{% endif %}
-{% if line.defaultDetails %} {{line.defaultDetails}} {% else %}
-{% if block.name == "Date:" %} {{line.details|date}} {% else %}
- {{line.details}} {% endif %}{% endif %}</td>
+             <tr>
+                 {% if line.defaulDetails or line.details %}
+                        {% if line.subtitle %}<td><b>{{line.subtitle}}</b></td>{% endif %}
+                        <td>
+		          {% if line.defaultDetails %} 
+                              {{line.defaultDetails}} 
+                          {% else %}
+                              {% if block.name == "Date:" %} 
+                                  {{line.details|date}} 
+                              {% else %}
+                                  {{line.details}} 
+                              {% endif %}
+                          {% endif %}
+                        </td>
+                 {% else %}
+                        {% if line.subtitle %}<td colspan=3><b>{{line.subtitle}}</b></td>{% else %}<td>{% endif %}
+                 {% endif %}
                     {% if block.totalSection %}
 	                {% if line.amount %}
                                <td align=right><b>&pound;{{ line.amount|floatformat:2 }}&nbsp;</b></td>
