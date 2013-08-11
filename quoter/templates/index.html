@@ -53,7 +53,7 @@ a:active {color: black;}  /* selected link */
           {% for line in block.lines %}       
              <tr>
                  {% if line.details %}
-                        {% if line.subtitle %}<td valign=top><b>{{line.subtitle}}</b></td>{% endif %}
+                        {% if line.subtitle %}<td valign=top width=13%><b>{{line.subtitle}}</b></td>{% endif %}
                         <td colspan=3>
                         {% if block.name == "Date:" %} 
                              {{line.details|date}} 
@@ -62,7 +62,7 @@ a:active {color: black;}  /* selected link */
                         {% endif %}
                         </td>
                  {% else %}
-                        {% if line.subtitle %}<td colspan=2 ><b>{{line.subtitle}}</b></td>{% else %}<td>{% endif %}
+                        {% if line.subtitle %}<td colspan=2 width=20%><b>{{line.subtitle}}</b></td>{% else %}<td>{% endif %}
                  {% endif %}
                     {% if block.totalSection %}
 	                {% if line.amount %}
