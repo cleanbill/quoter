@@ -27,7 +27,6 @@ a:hover {color: black;}  /* mouse over link */
 a:active {color: black;}  /* selected link */
 </style>
   </head>
-  DEBUG total length is {{ totals.length }}
   {% if print %}
       <body>
   {% else %}
@@ -83,7 +82,7 @@ a:active {color: black;}  /* selected link */
          <tr><td width=23% colspan=3><b>{{key}}</b></td><td align=right><b>&pound;{{ value|floatformat:2 }}&nbsp;</b></td></tr>
       {% endfor %}
       <tr><td colspan=4>&nbsp;</td></tr>
-      <tr>                              <td colspan=4 align=right>______</td></tr>
+      <tr>                              <td colspan=4 align=right>___________</td></tr>
       <tr><td colspan=2><b>Total Cost:</b></td><td colspan=2 align=right><b>&pound;{{ total|floatformat:2 }}&nbsp;</b></td></tr>
       <tr><td colspan=4>&nbsp;</td></tr>
       <tr><td colspan=4><b><small>Robin Scott</small></b></td></tr>
