@@ -151,7 +151,7 @@ def quote(request,quote_token,printFormat=False):
                 line.details = line.defaultDetails    
             if line.amount:
                 grandTotal = grandTotal + line.amount
-                totalName = line.subtitles.name
+                totalName = line.subtitle.name
                 if totalName in totals:
                     total = totals[totalName]
                     total = total + line.amount
