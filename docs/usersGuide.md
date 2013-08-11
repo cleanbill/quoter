@@ -9,3 +9,6 @@ Got to [http://gentle-cliffs-8060.herokuapp.com](http://gentle-cliffs-8060.herok
 
 !["Log on Screen"](https://raw.github.com/cleanbill/quoter/master/docs/Screenshot%20from%202013-08-11%2008:06:21.png)
 
+After logging in the screen should look like:
+
+!["Admin"](https://raw.github.com/cleanbill/quoter/master/docs/Screenshot%20from%202013-08-11%2008:10:20.png)
