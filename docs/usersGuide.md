@@ -1,14 +1,18 @@
 Users Guide
 ===========
 
-Quoter is currently deployed on heroku here [http://gentle-cliffs-8060.herokuapp.com](http://gentle-cliffs-8060.herokuapp.com). **As this not appropriate address for the design associates, I strongly recommend a better address is purchased from [http://www.123-reg.co.uk/] (http://www.123-reg.co.uk/) and redirect the site to [http://gentle-cliffs-8060.herokuapp.com](http://gentle-cliffs-8060.herokuapp.com)**
+Quoter is currently deployed on heroku here [https://gentle-cliffs-8060.herokuapp.com](https://gentle-cliffs-8060.herokuapp.com). **As this not appropriate address for the design associates, I strongly recommend a better address is purchased from [http://www.123-reg.co.uk/] (http://www.123-reg.co.uk/) and redirect the site to [https://gentle-cliffs-8060.herokuapp.com](https://gentle-cliffs-8060.herokuapp.com)**
 
 Creating a quote
 ----------------
-Got to [http://gentle-cliffs-8060.herokuapp.com](http://gentle-cliffs-8060.herokuapp.com) and your browser should show...
+Go to [https://gentle-cliffs-8060.herokuapp.com](https://gentle-cliffs-8060.herokuapp.com) (make sure its https Not just http) and your browser should show...
 
 !["Log on Screen"](https://raw.github.com/cleanbill/quoter/master/docs/Screenshot%20from%202013-08-11%2008:06:21.png)
 
 After logging in the screen should look like:
 
 !["Admin"](https://raw.github.com/cleanbill/quoter/master/docs/Screenshot%20from%202013-08-11%2008:10:20.png)
+
+Click on customers and enter a customer in
+ 
+!["Admin"](https://raw.github.com/cleanbill/quoter/master/docs/Screenshot%20from%202013-08-11%2008:11:52.png)
