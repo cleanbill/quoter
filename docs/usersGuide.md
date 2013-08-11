@@ -59,6 +59,8 @@ Then check the quote page - [https://gentle-cliffs-8060.herokuapp.com/quote/mick
 
 If everything is ok, highlight the address, right click, copy and paste it into an email to send to the customer.
 
+!["Admin"](https://raw.github.com/cleanbill/quoter/master/docs/Screenshot%20from%202013-08-11%2009:13:30.png)
+
 Job Done.
 
 
