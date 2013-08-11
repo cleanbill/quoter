@@ -54,11 +54,13 @@ a:active {color: black;}  /* selected link */
           {% for line in block.lines %}       
              <tr>
                  {% if line.defaulDetails or line.details %}
-                        {% if line.subtitle %}<td><b>{{line.subtitle}}</b></td>{% endif %}
+                        {% if line.subtitle %}<td valign=top><b>{{line.subtitle}}</b></td>{% endif %}
                         <td>
 		          {% if line.defaultDetails %} 
                               {{line.defaultDetails}} 
+dd
                           {% else %}
+no dd
                               {% if block.name == "Date:" %} 
                                   {{line.details|date}} 
                               {% else %}
