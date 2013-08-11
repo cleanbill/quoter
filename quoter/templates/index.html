@@ -51,13 +51,13 @@ a:active {color: black;}  /* selected link */
       {% for block in blocks %}
           <tr><td valign=top colspan=3><b>{{block.name}}</b></td><td><table border=0>          
           {% for line in block.lines %}       
-<tr><td>{% if line.subtitle %}{{line.subtitle}}</td><td>{% else %}<td>{% endif %}
+<tr>{% if line.subtitle %}<td colspan=2>{{line.subtitle}}</td><td>{% else %}<td>{% endif %}
 {% if line.defaultDetails %} {{line.defaultDetails}} {% else %}
 {% if block.name == "Date:" %} {{line.details|date}} {% else %}
  {{line.details}} {% endif %}{% endif %}</td>
                     {% if block.totalSection %}
 	                {% if line.amount %}
-                               <td align=right>&pound;{{ line.amount|floatformat:2 }}&nbsp;</td>
+                               <td align=right><b>&pound;{{ line.amount|floatformat:2 }}&nbsp;</b></td>
                         {% endif %} 
                     {% endif %}
 </tr>
@@ -70,6 +70,7 @@ a:active {color: black;}  /* selected link */
       <tr><td colspan=4>&nbsp;</td></tr>
       <tr><td colspan=4>&nbsp;</td></tr>
       {% for key,value in totals.items %}
+         <script>alert("key is "+key);</script>
          <tr><td width=23% colspan=3><b>{{key}}</b></td><td align=right><b>&pound;{{ value|floatformat:2 }}&nbsp;</b></td></tr>
       {% endfor %}
       <tr><td colspan=4>&nbsp;</td></tr>
