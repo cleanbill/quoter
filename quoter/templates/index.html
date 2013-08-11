@@ -53,19 +53,14 @@ a:active {color: black;}  /* selected link */
           <tr><td valign=top colspan=3><b>{{block.name}}</b></td><td><table border=0>          
           {% for line in block.lines %}       
              <tr>
-                 {% if line.defaulDetails or line.details %}
+                 {% if line.details %}
                         {% if line.subtitle %}<td valign=top><b>{{line.subtitle}}</b></td>{% endif %}
                         <td>
-		          {% if line.defaultDetails %} 
-sfsdf
-                              {{line.defaultDetails.name}} 
-                          {% else %}
-                              {% if block.name == "Date:" %} 
-                                  {{line.details|date}} 
-                              {% else %}
-                                  {{line.details}} 
-                              {% endif %}
-                          {% endif %}
+                        {% if block.name == "Date:" %} 
+                             {{line.details|date}} 
+                        {% else %}
+                             {{line.details}} 
+                        {% endif %}
                         </td>
                  {% else %}
                         {% if line.subtitle %}<td colspan=3><b>{{line.subtitle}}</b></td>{% else %}<td>{% endif %}
