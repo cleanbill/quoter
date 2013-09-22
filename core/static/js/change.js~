@@ -1,0 +1,83 @@
+// declare a module
+var quoter = angular.module('change', ['ui.bootstrap']);
+quoter.config(function($interpolateProvider) {
+  $interpolateProvider.startSymbol('{[{');
+  $interpolateProvider.endSymbol('}]}');
+})
+quoter.directive("ad", function() {
+    return {
+	restrict: 'E',
+        transclude: true,
+        controller: AlterCtrl,
+        template:"<a class='huge' ng-click=\"addSection(quote,$index)\">+</a>&nbsp;<a ng-click=\"deleteSection(quote,$index)\" class='huge' >-</a>&nbsp;<a class='huge' ng-click=\"changeSection(section)\">></a>"
+    }
+})
+quoter.directive("ads", function() {
+    return {
+	restrict: 'E',
+        transclude: true,
+        controller: AlterCtrl,
+        template:"<a class='huge text-right' ng-click=\"addSub(section,$index)\">+</a>&nbsp;<a ng-click=\"deleteSub(section,$index)\" class='huge' >-</a>&nbsp;<a class='huge' ng-click=\"changeSub(sub)\">></a>"
+    }
+})
+
+function AlterCtrl($scope){
+  $scope.quote = {"sections": [{"name":"Date","desc":"Sept 10.2013","state":"desc","fixed":true},
+                     {"name":"Client","desc":"Mick","state":"desc","fixed":true},
+                     {"name":"Description","desc":"Decoration of Kitchen - 14 High Road, Ragdale, LE14 6NP","state":"desc"},
+                     {"name":"Kitchen","subs":
+                             [
+                           {"name":"Ceiling","desc":"Make-good cracks, Sugar Soap plus 2x coats 'Apple White' matt emulsion","state":"sub-desc"},
+                           {"name":"Labour Charge:","total":"380,00","state":"total"},
+                           {"name":"Travelling Costs:","total":"30,00","state":"total"}
+                             ],"state":"sub"
+                     }
+                    ]};
+  $scope.changeSection = function(section){
+       if (section.state === 'desc'){
+          section.state = 'sub';
+          if (!section.subs){
+              section.subs  = [{"name":"","desc":"","state":"sub-desc"}];
+          }
+       } else {
+          section.state = 'desc';
+       }
+  };
+  $scope.addSection = function(quote,index){
+        alert(quote.sections.length);
+        alert(quote.sections[index].name);
+        sections.splice(index+1, 0, {"name":"","desc":"","state":"desc"});
+        alert(quote.sections.length);
+        alert($scope.quote.sections.length);
+  };
+  $scope.deleteSection = function($rootScope,quote,$index) {
+        alert("len is "+$rootScope.quote.sections.length);
+        alert($rootScope.quote.sections[$index].name);
+        $rootScope.quote.sections.splice($index,1);
+        alert("len is "+$rootScope.quote.sections.length);
+        $rootScope.$apply();
+  };
+  $scope.changeSub = function(sub){
+       if (sub.state === 'sub-desc'){
+          sub.state = 'total';
+       } else {
+          sub.state = 'sub-desc';
+       }
+  }; 
+  $scope.addSub = function(section,index){
+        section.subs.splice(index+1, 0, {"name":"","desc":"","state":"sub-desc"});
+  };
+  $scope.deleteSub = function(section,index){
+       section.subs.splice(index,1);
+  };
+}
+quoter.controller("alterCtrl",AlterCtrl);
+
+function TypeaheadCtrl($scope){
+  $scope.selected = undefined;
+  $scope.init = function(data)
+  {
+    $scope.elements = data;
+  };
+}
+

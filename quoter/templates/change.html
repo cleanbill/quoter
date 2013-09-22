@@ -1,0 +1,91 @@
+<html>
+<!--
+#
+#    This file is part of quoter.
+#
+#    quoter is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU Lesser General Public License as published by
+#    the Free Software Foundation, either version 3 of the License, or
+#    any later version.
+#
+#    Foobar is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU Lesser General Public License
+#    along with quoter.  If not, see <http://www.gnu.org/licenses/>.
+#
+-->
+
+<html ng-app="change">
+  <head>
+    <link rel="shortcut icon" href="../img/tda-logo.png" />
+    <script>
+var quote = {"sections": [{"name":"Date","desc":"Sept 10.2013","state":"desc","fixed":true},
+                     {"name":"Client","desc":"Mick","state":"desc","fixed":true},
+                     {"name":"Description","desc":"Decoration of Kitchen - 14 High Road, Ragdale, LE14 6NP","state":"desc"},
+                     {"name":"Kitchen","subs":
+                             [
+                           {"name":"Ceiling","desc":"Make-good cracks, Sugar Soap plus 2x coats 'Apple White' matt emulsion","state":"sub-desc"},
+                           {"name":"Labour Charge:","total":380.00,"state":"total"},
+                           {"name":"Travelling Costs:","total":30.00,"state":"total"}
+                             ],"state":"sub"
+                     }
+                    ]};
+</script>
+  </head>
+  <body align=center>
+  <!-- split screen using bootstrap -->
+     <div ng-controller="AlterCtrl" >
+       <div class="row-fluid" ng-repeat="section in quote.sections">
+	 <div ng-show="!section.fixed" class="span1 span-right"><ad></ad></div>
+             <div ng-show="!section.fixed" 
+                  sectclass='container-fluid' 
+                  class="span4"
+                  ng-controller="TypeaheadCtrl"  
+                  ng-init="init([{% for c in sectops %}'{{ c.name |safe}}'{% if not forloop.last %},{% endif %}{% endfor %}])">
+                       <input type="text" 
+                              ng-model='section.name' 
+                              typeahead="element for element in elements | filter:$viewValue">
+             </div>
+	     <div class="span4" ng-show="section.fixed"><b>{[{section.name}]}</b></div>
+	     <div class="span4 pull-left" ng-show="section.state=='desc'"><textarea style="margin: 0px 0px 10px; width: 446px; height: 50px;" ng-model="section.desc" ></textarea></div>
+
+       <div class="span2" ng-show="section.state=='sub'">
+              <table border=1>
+              <tr ng-repeat="sub in section.subs">
+                   
+                   <td><b>
+             <div ng-controller="TypeaheadCtrl"  
+                  ng-init="init([{% for c in subopts %}'{{ c.name |safe}}'{% if not forloop.last %},{% endif %}{% endfor %}])">
+                       <input type="text" 
+                              ng-model="sub.name" 
+                              typeahead="element for element in elements | filter:$viewValue">
+             </div></td>
+                     <td  ng-show="sub.state=='sub-desc'"><textarea style="margin: 0px 0px 10px; width: 446px; height: 50px;" ng-model="sub.desc"></textarea></td>
+                     <td  ng-show="sub.state=='total'">£<input type="text" ng-model="sub.total" /></td>
+ 		     <td><ads></ads></td>
+
+              </tr>
+              <tr><td><totals></totals></td>
+              </tr>
+             </table>
+       </div>        
+     </div>
+    </div>
+    <div>&nbsp;</div>
+    <div align="center"><input type="button" class="btn" value="Save Changes" /></div>
+  </body>
+
+<footer>
+ <script src='/static/js/angular.js'></script>
+ <script src='/static/js/change.js'></script>
+ <script src='/static/js/ui-bootstrap-tpls-0.4.0.js'></script>
+ <script src='/static/js/jquery-latest.min.js'></script>
+ <script src='/static/js/jquery-impromptu.3.1.min.js'></script>
+
+ <link type="text/css" href="/static/css/quoter.css" rel="stylesheet">
+ <link type="text/css" href="/static/css/bootstrap-combined.min.css" rel="stylesheet">
+</footer>
+</html>
