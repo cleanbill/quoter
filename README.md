@@ -21,13 +21,11 @@ Technologies
 4. Hopefully use [Heroku](https://www.heroku.com/) to host for free, but means I have to get the database model right first time
 
 
-TODO: Edit Screen
+TODO: Change Screen
 -----------------
 
-1. Add a state to describe, lines (desc or not), sub lines (total or not), so when deleting text line doesn't go.
-2. Do a ">" for changing state of lines
-3. When totals change the grand total should change
-4. Do a [JQuery Impromptu](http://trentrichardson.com/Impromptu/index.php) prompt box for client input.
-5. Post JSON model directly to django
-6. Have Django amend the data in the database.
-7. Have a list screen to pick/delete quotes. 
+1. Put watch on totals to do the grand totals
+2. Post JSON model directly to django
+3. Have Django amend the data in the database.
+4. Have a list screen to pick/delete quotes. 
+5. Put log-in framework in place
