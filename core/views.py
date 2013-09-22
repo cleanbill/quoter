@@ -18,12 +18,17 @@ from django.http                import HttpResponse, HttpResponseRedirect, Http4
 from django.shortcuts           import render_to_response, redirect
 from django.contrib.auth.models import User
 
-from core.models import Quote, QuoteLine, Viewing 
+from core.models import *
 from datetime import date, timedelta 
 import datetime
 from django.utils import timezone
 import logging
 
+from django.core import serializers
+import json
+
+from django.core import serializers
+from django.utils import simplejson
 
 # Get an instance of a logger
 logger = logging.getLogger(__name__)
@@ -62,6 +67,8 @@ def getDateBlock(quote):
     line = QuoteLine()
     line.details= quote.first_inserted
     block.lines = [line]
+    block.default = True
+    block.date = True
     return block
     
 def getClientBlock(quote):
@@ -72,6 +79,7 @@ def getClientBlock(quote):
     line = QuoteLine()
     line.details= quote.customer.name
     block.lines = [line]
+    block.default = True
     return block
 
 def printQuote(request,quote_token):
@@ -109,9 +117,8 @@ def jumpin(request):
 def nowhere(request):
         params = {}
         return render_to_response('404.html',params)
-        
-def quote(request,quote_token,printFormat=False):
 
+def error(request,quote_token,printFormat=False):
         view = Viewing()
         view.quote = quote_token
         view.ip    = get_client_ip(request)
@@ -124,6 +131,72 @@ def quote(request,quote_token,printFormat=False):
             #raise Http404
             return nowhere(request)
         
+        # serve quote
+        quoteHeader = Quote.objects.get(token=quote_token)
+        if (not quoteHeader.display):
+            logger.info("'%s' is set to not display" % quote_token)
+            #raise Http404
+            return nowhere(request)
+        return
+        
+def edit(request,quote_token,printFormat=False):
+        err = error(request,quote_token,printFormat=False)
+        if err: return err        
+        quoteHeader = Quote.objects.get(token=quote_token)
+        quoteLines  = QuoteLine.objects.filter(quote=quoteHeader).order_by( 'section' )
+        customers   = Customer.objects.all()#.values_list('name')
+        subopts     = SubHeading.objects.all()
+        sectops     = Section.objects.all()
+        #detailops   = QuoteLine.objects.all().values('details').distinct()
+        #print "details are %s" % detailops
+        allCust     = customers#simplejson.dumps(list(customers))#serializers.serialize("json",[customers])
+        blocks = []
+        name = ""
+        grandTotal = 0
+        totals = {}
+        for line in quoteLines:
+            if line.defaultDetails:
+                line.details = line.defaultDetails    
+            if line.amount:
+                grandTotal = grandTotal + line.amount
+                totalName = line.subtitle.name
+                if totalName in totals:
+                    total = totals[totalName]
+                    total = total + line.amount
+                    totals[totalName] = total
+                else:
+                    totals[totalName] = line.amount
+            if line.section.name != name:
+                  blocks.append(totalSection(quoteLines,line.section.name))
+                  name = line.section.name  
+        blocks = sorted(blocks,key=lambda block: block.order)
+        blocks.insert(0,getClientBlock(quoteHeader))
+        blocks.insert(0,getDateBlock(quoteHeader))
+        params = {'token':quote_token,
+                  'quote':quoteHeader,
+                  'customer':quoteHeader.customer,
+                  'blocks': blocks,
+                  'totals':totals,
+                  'expireDate':"%s"%quoteHeader.expire, #.strftime('%d/%M/%Y'),
+                  'total':grandTotal,
+                  'subopts':subopts,
+        # 'detailops':detailops,
+                  'sectops':sectops,
+                  'custs':customers}
+        print params
+        #print json.dumps(params)
+        return render_to_response('edit.html',params)
+
+def alter(request,quote_token):
+        sectops  = Section.objects.all()
+        subopts  = SubHeading.objects.all()
+
+        params   = {'sectops':sectops,'subopts':subopts}
+        return render_to_response('change.html',params)
+
+def quote(request,quote_token,printFormat=False):
+        err = error(request,quote_token,printFormat=False)
+        if err: return err        
         # serve quote
         quoteHeader = Quote.objects.get(token=quote_token)
         if (not quoteHeader.display):
@@ -164,5 +237,13 @@ def quote(request,quote_token,printFormat=False):
         blocks = sorted(blocks,key=lambda block: block.order)
         blocks.insert(0,getClientBlock(quoteHeader))
         blocks.insert(0,getDateBlock(quoteHeader))
-        params = {'token':quote_token,'quote':quoteHeader,'customer':quoteHeader.customer,'blocks':blocks,'totals':totals,'total':grandTotal,'expired':expired,'print':printFormat}
+        params = {'token':quote_token,
+                  'quote':quoteHeader,
+                  'customer':quoteHeader.customer,
+                  'blocks':blocks,
+                  'totals':totals,
+                  'total':grandTotal,
+                  'expired':expired,
+                  'print':printFormat}
         return render_to_response('index.html',params)
+        

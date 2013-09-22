@@ -66,6 +66,9 @@ class QuoteLine(models.Model):
     first_inserted = models.DateTimeField(auto_now_add=True)
     last_updated   = models.DateTimeField(auto_now=True)
 
+    #class Meta:
+    #    detail = ('details', 'defaultDetails',)
+    
     def __unicode__(self):
         return "%s %s %s " %(self.quote, self.details, self.amount)
 

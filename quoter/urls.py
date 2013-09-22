@@ -1,3 +1,4 @@
+
 from django.conf.urls import patterns, include, url
 
 # Uncomment the next two lines to enable the admin:
@@ -14,6 +15,8 @@ urlpatterns = patterns('',
 )
 
 urlpatterns += patterns('core.views',
+    (r'alter/(?P<quote_token>.+)$','alter'),
+    (r'edit/(?P<quote_token>.+)$','edit'),
     (r'quote/(?P<quote_token>.+)$','quote'),
     (r'print/(?P<quote_token>.+)$','printQuote'),
     (r'toggle/(?P<quote_token>.+)$','toggle'),
