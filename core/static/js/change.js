@@ -24,39 +24,60 @@ quoter.directive("ads", function() {
     }
 });
 
-quoter.directive("totals",function() {
-    return {
-	restrict: 'E',
-        controller: AlterCtrl,
-        link: function($scope){
-             var totals = {};
-             for (var i=0; i < quote.sections.length;i++){
-		 if (quote.sections[i].state === 'sub'){
-                     for (var x=0; x < quote.sections[i].subs.length; x++){
-                            if (quote.sections[i].subs[x].state == 'total'){
-                                 var current = totals[quote.sections[i].subs[x].name];
-				 if (typeof current === "undefined") {
-                                     current = quote.sections[i].subs[x].total;
-                                 } else {
-                                     current = current + quote.sections[i].subs[x].total;
-                                 }
-                                 totals[quote.sections[i].subs[x].name] = current;
-                            }
-                     }
-                 }
-            }   
-            
-            $scope.totalTitles = Object.keys(totals);
-            $scope.totalTotals = totals
-            
-        },
-        template:"<div class='row-fluid' ng-repeat='tt in totalTitles'><b>{[{tt}]} £{[{ totalTotals[tt] }]}</b></div>"
-    }
-});
-
-
 function AlterCtrl($scope){
   $scope.quote = quote;
+  $scope.isTotal = function(sub){
+      return sub.state === 'total';
+  };
+  var totalOfSection = function(section,name){
+    var total = 0;
+      if (section.state === 'sub'){
+        section.subs.forEach(function(sub){
+          if (sub.state === 'total' && sub.name === name && sub.total > 0 ){
+            total = total + parseInt(sub.total);
+          }
+        });
+      }
+    return total;
+  }
+  var totalOf = function(name){
+    var total = 0;
+    $scope.quote.sections.forEach(function(section){
+      total = total + totalOfSection(section,name);
+    });
+    return total;
+  }
+  $scope.subtotal = function(section,sub,clear){
+    if (clear){
+      $scope.totals ={};
+    }
+    var current = $scope.totals[sub.name];
+    if (typeof current === "undefined") {
+      current = totalOfSection(section,sub.name);
+      $scope.totals[sub.name] = current;
+      if (current > 0){
+        return sub.name+" £"+current;
+      }
+    }
+    return "";
+  }
+
+  $scope.cleargrandtotal = function(clear){
+    if (clear){
+      $scope.gtotals ={};
+    }
+  }
+  $scope.grandtotal = function(sub){
+    var current = $scope.gtotals[sub.name];
+    if (typeof current === "undefined") {
+      current = totalOf(sub.name);
+      $scope.gtotals[sub.name] = current;
+      if (current > 0){
+        return sub.name+" £"+current;
+      }
+    }
+    return "";
+  }
   $scope.changeSection = function(section){
        if (section.state === 'desc'){
           section.state = 'sub';
@@ -79,7 +100,7 @@ function AlterCtrl($scope){
        } else {
           sub.state = 'sub-desc';
        }
-  }; 
+  };
   $scope.addSub = function(section,index){
         section.subs.splice(index+1, 0, {"name":"","desc":"","state":"sub-desc"});
   };
@@ -96,4 +117,3 @@ function TypeaheadCtrl($scope){
     $scope.elements = data;
   };
 }
-

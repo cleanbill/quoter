@@ -17,8 +17,8 @@ Technologies
 
 1. [Django](https://www.djangoproject.com/)
 2. [Postgres](http://www.postgresql.org/) to work with [Heroku](https://www.heroku.com/), but [MongoDB](http://www.mongodb.org/) is better.
-3. [AngularJs](http://angularjs.org/) -> Not used...boo!
-4. Hopefully use [Heroku](https://www.heroku.com/) to host for free, but means I have to get the database model right first time
+3. [AngularJs](http://angularjs.org/) -> for admin screen
+4. [Heroku](https://www.heroku.com/) to host for free, but means I have to get the database model right first time
 
 
 TODO: Change Screen
